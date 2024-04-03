@@ -1,0 +1,56 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* 'Playfair Display', serif; */
+.container-fluid{
+  margin-left: 10px;
+}
+.navbar{
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 6px -6px gray;
+  --webkit-box-shadow: 0 8px 6px -6px gray;
+  border-bottom: 0.3px solid gray !important;
+}
+
+.nav-link{
+  font-weight: 300 !important;
+
+}
+.active{
+  border-bottom: 1px solid white;
+}
+.navimage{
+  width: 50px;
+  margin-right: 20px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.cart{
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-brand{
+  font-weight: 700;
+  font-family: 'roboto', sans-serif;
+  letter-spacing: 3px;
+}
+
+.footer-links{
+  text-decoration: none;
+}
+
+.footer-links:hover{
+  text-decoration:overline;
+}
+
+.footer Link:hover{
+  color: yellow !important;
+}
