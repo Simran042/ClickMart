@@ -23,32 +23,34 @@ const ForgotPassword = () => {
     const handleAnswerChange = (e) => {
         setAnswer(e.target.value);
       };
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const formData = {
-        email: email,
-        newPassword: newPassword,
-        answer: answer
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = {
+          email: email,
+          newPassword: newPassword,
+          answer: answer
+        };
+        console.log(formData);
+        try {
+          const res = await axios.post(
+            `${process.env.react_app_api}/api/v1/auth/forgot-password`,
+            formData
+          );
+          console.log(formData);
+          if (res.data.success) {
+            toast.success(res.data.message);
+            setTimeout(() => {
+              navigate('/login');
+            }, 2000); // 2000 milliseconds delay
+          } else {
+            toast.error(res.data.message);
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error("Something went wrong");
+        }
       };
-      console.log(formData);
-      const res = await axios.post(
-        `${process.env.react_app_api}/api/v1/auth/forgot-password`,
-        formData
-      );
-      console.log(formData);
-      if (res.data.success) {
-        toast.success(res.data.message, { duration: 2000 });
-        navigate('/login')
-      } else {
-        toast.error(res.data.message, { duration: 2000 });
-      }
-      //toast.success("Successful submission")
-      try {
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong", { duration: 2000 });
-      }
-    };
+      
   return (
     <Layout title= {"Forgot Password"}>
       <Container

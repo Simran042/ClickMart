@@ -11,6 +11,9 @@ router.get('/user-auth', requireSignIn, (req, res) => {
   });
 router.get('/test', requireSignIn, isAdmin, testController);
 
-
+router.get('/admin-auth', requireSignIn, isAdmin, (req, res) => {
+  console.log("OKAY");
+  res.status(200).send({ ok: true });
+});
 
 export default router;

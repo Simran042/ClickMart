@@ -7,7 +7,7 @@ import cors from 'cors';
 config();
 
 connectdb();
-
+console.log("db connected");
 //rest object
 const app= express();
 //rest api

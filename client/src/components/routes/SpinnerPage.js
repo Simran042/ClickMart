@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const SpinnerPage = () => {
+const SpinnerPage = ({path= "login"}) => {
   const [count, setCount] = useState(5);
   const navigate = useNavigate();
   const location= useLocation();
@@ -16,14 +16,14 @@ const SpinnerPage = () => {
 
     // Redirect when count reaches 0
     if (count === 0) {
-      navigate('/login', {
+      navigate(`/${path}`, {
         state: location.pathname
       });
     }
 
     // Clear the interval when component unmounts
     return () => clearInterval(interval);
-  }, [count, navigate, location]);
+  }, [count, navigate, location, path]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>

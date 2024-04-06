@@ -42,6 +42,7 @@ const Register = () => {
       password: password,
       address: address,
       phone: phone,
+      answer: answer
     };
     const res = await axios.post(
       `${process.env.react_app_api}/api/v1/auth/register`,
@@ -50,7 +51,9 @@ const Register = () => {
     //console.log(formData);
     if (res.data.success) {
       toast.success(res.data.message, { duration: 2000 });
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } else {
       toast.error(res.data.message, { duration: 2000 });
     }
