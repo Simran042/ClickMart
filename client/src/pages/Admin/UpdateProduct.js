@@ -56,7 +56,6 @@ const UpdateProduct = () => {
     getAllCategory();
   }, []);
 
-  //create product function
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -84,13 +83,16 @@ const UpdateProduct = () => {
   };
   const handleDelete = async () => {
     try {
-      let answer = window.prompt("Are You Sure want to delete this product ? ");
-      if (!answer) return;
+        const confirmed = window.confirm("Are you sure you want to delete this product?");
+        if (!confirmed) return;
       const { data } = await axios.delete(
         `${process.env.react_app_api}/api/v1/product/delete-product/${id}`
       );
-      toast.success("Product DEleted Succfully");
-      navigate("/dashboard/admin/products");
+      toast.success("Product Deleted Successfully");
+      setTimeout(()=>{
+        navigate("/dashboard/admin/products");
+      }, 2000);
+      
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
