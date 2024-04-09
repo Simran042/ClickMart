@@ -22,7 +22,7 @@ const Products = () => {
   }, []);
   return (
     <Layout>
-      <div className="row dashboard">
+      <div className="row dashboard m-4 p-4">
         <div className="col-md-3">
           <AdminMenu />
         </div>
@@ -35,7 +35,7 @@ const Products = () => {
                 to={`/dashboard/admin/product/${p.slug}`}
                 className="product-link"
               >
-                <div className="card m-2" style={{ width: "200px" }}>
+                <div className="card m-2" style={{ width: "270px" }}>
                   <img
                     src={`${process.env.react_app_api}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"

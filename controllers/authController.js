@@ -1,5 +1,7 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
+import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+
 import jwt from "jsonwebtoken";
 export const registerController = async (req, res) => {
   try {
@@ -204,14 +206,14 @@ export const getAllOrdersController = async (req, res) => {
     const orders = await orderModel
       .find({})
       .populate("products", "-photo")
-      .populate("buyer", "name")
-      .sort({ createdAt: "-1" });
+      .populate("buyer", "name");
+    // .sort({ createdAt: "-1" })
     res.json(orders);
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error WHile Geting Orders",
+      message: "Error While Geting Orders",
       error,
     });
   }

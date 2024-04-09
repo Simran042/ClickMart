@@ -3,7 +3,7 @@ import Layout from "./../components/layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
-// import DropIn from "braintree-web-drop-in-react";
+import DropIn from "braintree-web-drop-in-react";
 // import { AiFillWarning } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -48,8 +48,10 @@ const CartPage = () => {
   //get payment gateway token
   const getToken = async () => {
     try {
-        console.log("HELLO");
-      const { data } = await axios.get(`${process.env.react_app_api}/api/v1/product/braintree/token`);
+      console.log("HELLO");
+      const { data } = await axios.get(
+        `${process.env.react_app_api}/api/v1/product/braintree/token`
+      );
       setClientToken(data?.clientToken);
     } catch (error) {
       console.log(error);
@@ -64,14 +66,20 @@ const CartPage = () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post(`${process.env.react_app_api}/api/v1/product/braintree/payment`, {
-        nonce,
-        cart,
-      });
+      const { data } = await axios.post(
+        `${process.env.react_app_api}/api/v1/product/braintree/payment`,
+        {
+          nonce,
+          cart,
+        }
+      );
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
-      navigate("/dashboard/user/orders");
+      setTimeout(()=>{
+        navigate("/dashboard/user/orders");
+      }, 2000)
+      
       toast.success("Payment Completed Successfully ");
     } catch (error) {
       console.log(error);
@@ -170,10 +178,17 @@ const CartPage = () => {
               )}
               <div className="mt-2">
                 {!clientToken || !auth?.token || !cart?.length ? (
+                  // <>
+                  //   {clientToken}
+                  //   <hr />
+                  //   {auth?.token}
+                  //   <hr />
+                  //   {cart?.length}
+                  // </>
                   ""
                 ) : (
                   <>
-                    {/* <DropIn
+                    <DropIn
                       options={{
                         authorization: clientToken,
                         paypal: {
@@ -181,7 +196,7 @@ const CartPage = () => {
                         },
                       }}
                       onInstance={(instance) => setInstance(instance)}
-                    /> */}
+                    />
 
                     <button
                       className="btn btn-primary"
